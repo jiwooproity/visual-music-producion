@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "target": "es5",
+        // 어떤 부분의 javascript 로 바꿔줄지 정하는 부분
+        "module": "esnext",
+        // import 문법을 구현하는 부분
+        // commonJs는 require, es2015, esnext는 import 문법을 사용한다.
+
+        "jsx": "react-jsx",
+        "noImplicitAny": true,
+    },
+    "include": ["src"]
+}
