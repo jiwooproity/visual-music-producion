@@ -1,0 +1,1 @@
+{"version":3,"file":"main.css","mappings":"AAAA","sources":["webpack://visual-music-production/./src/app.scss"],"sourcesContent":["* {\n    margin: 0px;\n    padding: 0px;\n}\n\n.container {\n    width: 100%;\n    height: 100vh;\n    padding: 15px;\n    display: flex;\n    flex-direction: column;\n\n    span {\n        padding: 10px 0px;\n    }\n}"],"names":[],"sourceRoot":""}
