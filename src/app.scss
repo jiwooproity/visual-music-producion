@@ -13,4 +13,23 @@
     span {
         padding: 10px 0px;
     }
+
+    .menu-wrapper {
+        width: 100%;
+        padding: 15px 15px;
+        background-color: black;
+
+        .menu {
+            display: flex;
+
+            .list {
+                list-style: none;
+                padding: 5px;
+
+                a {
+                    color: white;
+                }
+            }
+        }
+    }
 }
