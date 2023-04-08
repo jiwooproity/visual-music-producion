@@ -11,11 +11,14 @@ dotenv.config();
 module.exports = {
     entry: './src/index.tsx',
     output: {
-        path: path.resolve(__dirname + "/dist"),
+        path: path.resolve(__dirname, "/dist"),
         filename: 'bundle.js'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.jsx'],
+        alias: {
+            '@': path.resolve(__dirname, '/src')
+        },
     },
     module: {
         rules: [

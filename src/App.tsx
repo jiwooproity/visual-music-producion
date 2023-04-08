@@ -1,10 +1,18 @@
 import "./app.scss";
+import { Header } from "@/common";
+import { Home, Test } from "@/components";
+import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
 
 const App = () => {
     return (
         <div className="container">
-            <span>Webpack and react with typescript</span>
-            <span>{process.env.REACT_ENV_TEST}</span>
+            <BrowserRouter>
+                <Header />
+                <Routes>
+                    <Route path="/" element={<Home />}/>
+                    <Route path="/test" element={<Test />}/>
+                </Routes>
+            </BrowserRouter>
         </div>
     )
 }
