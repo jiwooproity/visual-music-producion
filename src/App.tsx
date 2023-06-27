@@ -1,20 +1,19 @@
-import "./app.scss";
-import { Header } from "@/common";
-import { Home, Test } from "@/components";
-import { BrowserRouter, Link, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom/dist";
+
+import "./app.less";
+
+import { Visualizer } from "@/components";
 
 const App = () => {
-    return (
-        <div className="container">
-            <BrowserRouter>
-                <Header />
-                <Routes>
-                    <Route path="/" element={<Home />}/>
-                    <Route path="/test" element={<Test />}/>
-                </Routes>
-            </BrowserRouter>
-        </div>
-    )
-}
+  return (
+    <div className="app-container">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Visualizer />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  );
+};
 
 export default App;
