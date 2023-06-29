@@ -57,7 +57,7 @@ const Visualizer = () => {
             className={`visualizer-slide-item`}
             style={{
               zIndex: `${onCheckIndex({ index }) ? "999" : ""}`,
-              transform: `rotate(${index * averRotate}deg)  translate(700px)`,
+              transform: `rotate(${index * averRotate}deg)  translate(1200px)`,
             }}
           >
             <img
