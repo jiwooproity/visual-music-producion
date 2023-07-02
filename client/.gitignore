@@ -1,9 +1,5 @@
 # node_modules ( 이거 통째로 올리면 클남 ㅋㅋ )
-/client/node_modules
-/server/node_modules
-
-# 빌드 파일
-/client/dist
+/node_modules
 
 # .env 노출되면 안되는 정보
 .env
