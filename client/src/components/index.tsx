@@ -1,3 +1,5 @@
-import Visualizer from "./visualizer/Visualizer";
+import RotateAlbum from "./page/album/RotateAlbum";
+import RotateStyle from "./page/album/RotateStyle";
+import Visualizer from "./page/visualizer/Visualizer";
 
-export { Visualizer };
+export { RotateAlbum, RotateStyle, Visualizer };
