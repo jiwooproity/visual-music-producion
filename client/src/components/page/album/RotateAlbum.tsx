@@ -14,8 +14,8 @@ import { DefaultButton, LazyImage } from "@/common";
 import { RotateStyle } from "@/components";
 
 const images = [
-  { src: changed },
   { src: rollin },
+  { src: changed },
   { src: chimatbaram },
   { src: goodbye },
   { src: highheel },
@@ -30,7 +30,7 @@ const ButtonType = {
 };
 
 const RotateAlbum = () => {
-  let timeout = null;
+  let timeout: any = null;
   const [rotateIdx, setRotateIdx] = useState<number>(0);
   const [selectIdx, setSelectIdx] = useState<number>(0);
   const [visibleLP, setVisibleLP] = useState<boolean>(true);
@@ -44,6 +44,7 @@ const RotateAlbum = () => {
     const target = e.target as HTMLButtonElement;
     const direction = target.dataset.type;
 
+    clearTimeout(timeout);
     setVisibleLP(false);
 
     switch (direction) {
@@ -61,7 +62,7 @@ const RotateAlbum = () => {
         break;
     }
 
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       setVisibleLP(true);
     }, 500);
   };

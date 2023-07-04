@@ -42,6 +42,10 @@ module.exports = {
         test: /\.svg$/,
         type: "asset/inline",
       },
+      {
+        test: /\.flac$/,
+        type: "asset/resource",
+      },
     ],
   },
   plugins: [
