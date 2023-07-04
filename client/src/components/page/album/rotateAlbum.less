@@ -39,6 +39,7 @@
   transform-origin: top;
   transform: translateY(-50%);
   transition: transform 0.2s ease;
+  z-index: 2;
 }
 
 .album-slide-box > .album-slide-item {
@@ -68,22 +69,22 @@
   width: 500px;
   height: 500px;
   position: absolute;
-  top: -250px;
-  left: -250px;
+  top: calc(50% - 250px);
+  left: 50px;
   background-image: url(../../../assets/images/lp/lp.png);
   background-position: 50% 50%;
   background-size: 100%;
   background-repeat: no-repeat;
   opacity: 0;
   transform-origin: center;
-  transition: opacity 0.2s ease, left 0.8s ease;
+  transition: opacity 0.2s ease-in, left 0.8s ease;
   z-index: 1;
   animation: rotatePlay 2.5s linear infinite;
 }
 
 .album-lp.select {
   opacity: 1;
-  left: -50px;
+  left: 250px;
 }
 
 @keyframes rotatePlay {
@@ -106,6 +107,7 @@
   cursor: pointer;
   opacity: 0;
   transition: opacity 0.2s ease;
+  z-index: 3;
 }
 
 .rotate-button:hover {

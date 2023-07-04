@@ -1,4 +1,4 @@
-import { EventHandler, useState } from "react";
+import { useState } from "react";
 
 import "./rotateAlbum.less";
 import changed from "@/assets/images/cover/changed.png";
@@ -10,7 +10,7 @@ import redsun from "@/assets/images/cover/redsun.png";
 import weride from "@/assets/images/cover/weride.png";
 import youhu from "@/assets/images/cover/youhu.png";
 
-import { DefaultButton } from "@/common";
+import { DefaultButton, LazyImage } from "@/common";
 import { RotateStyle } from "@/components";
 
 const images = [
@@ -30,9 +30,10 @@ const ButtonType = {
 };
 
 const RotateAlbum = () => {
+  let timeout = null;
   const [rotateIdx, setRotateIdx] = useState<number>(0);
   const [selectIdx, setSelectIdx] = useState<number>(0);
-
+  const [visibleLP, setVisibleLP] = useState<boolean>(true);
   const averRotate = Math.ceil(360 / images.length);
 
   const isSelect = (index: number, active: string) => {
@@ -42,6 +43,8 @@ const RotateAlbum = () => {
   const onRotate = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLButtonElement;
     const direction = target.dataset.type;
+
+    setVisibleLP(false);
 
     switch (direction) {
       case ButtonType.PREV:
@@ -57,18 +60,25 @@ const RotateAlbum = () => {
       default:
         break;
     }
+
+    setTimeout(() => {
+      setVisibleLP(true);
+    }, 500);
   };
 
   return (
     <>
       {images.map((image, index) => (
-        <img
+        <LazyImage
+          key={index}
           className={`album-background ${isSelect(index, "select")}`}
           src={image.src}
+          alt="LP"
         />
       ))}
-      <div className="album-background-filter"></div>
+      <div className="album-background-filter" />
       <div className="album-container">
+        <div className={`album-lp ${visibleLP ? "select" : ""}`} />
         <RotateStyle
           className="album-slide-box"
           rotate={rotateIdx * averRotate}
@@ -82,13 +92,13 @@ const RotateAlbum = () => {
               translate="translate(1200px)"
               zIndex={isSelect(index, "999")}
             >
-              <img
+              <LazyImage
                 className={`album-cover ${isSelect(index, "select")}`}
                 src={image.src}
-                width={500}
-                height={500}
+                width="500px"
+                height="500px"
+                alt="lazy"
               />
-              <div className={`album-lp ${isSelect(index, "select")}`} />
             </RotateStyle>
           ))}
         </RotateStyle>
