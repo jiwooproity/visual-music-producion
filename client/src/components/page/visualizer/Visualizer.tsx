@@ -1,9 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+
 import "./visualizer.less";
-
-import rollin_sample from "@/assets/files/rollin.flac";
-
-import { RotateAlbum } from "@/components";
 
 let WIDTH = 0;
 let HEIGHT = 0;
@@ -20,13 +17,12 @@ let b = 0;
 let a = 0;
 let x = 0;
 
-const Visualizer = () => {
+const Visualizer = ({ file }: { file: string }) => {
   const canvasRef = useRef(null);
   const effectRef = useRef(null);
   const [context, setContext] = useState<CanvasRenderingContext2D>(null);
   const [efContext, setEfContext] = useState<CanvasRenderingContext2D>(null);
   const [audioContext, setAudioContext] = useState<AudioContext>(null);
-  const [audioFile, setAudioFile] = useState<string>("");
   const [freqArr, setFreqArr] = useState([]);
   const [analyser, setAnalyser] = useState(null);
 
@@ -184,7 +180,6 @@ const Visualizer = () => {
 
       let freqArr: any = new Uint8Array(analyser.frequencyBinCount);
 
-      setAudioFile(rollin_sample);
       setFreqArr(freqArr);
       setAnalyser(analyser);
       setAudioContext(audioContext);
@@ -208,18 +203,17 @@ const Visualizer = () => {
   }, []);
 
   return (
-    <div className="visualizer-container">
-      <RotateAlbum />
+    <>
       <canvas ref={canvasRef} className="visualizer-canvas"></canvas>
       <canvas ref={effectRef} className="effect-canvas"></canvas>
       <audio
-        src={audioFile}
+        src={file}
         id="audio"
         crossOrigin="anonymous"
         controls
         onPlay={onPlay}
       />
-    </div>
+    </>
   );
 };
 
