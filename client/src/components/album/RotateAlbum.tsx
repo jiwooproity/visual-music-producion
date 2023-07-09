@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import "./rotateAlbum.less";
 import changed from "@/assets/images/cover/changed.png";
@@ -29,10 +29,19 @@ const ButtonType = {
   NEXT: "next",
 };
 
-const RotateAlbum = () => {
+interface RotateAlbumPropsType {
+  selectIdx: number;
+  setSelectIdx: Dispatch<SetStateAction<number>>;
+  audioEl: HTMLAudioElement;
+}
+
+const RotateAlbum = (props: RotateAlbumPropsType) => {
+  const { selectIdx, setSelectIdx } = props;
+  const { audioEl } = props;
+
   let timeout: any = null;
+
   const [rotateIdx, setRotateIdx] = useState<number>(0);
-  const [selectIdx, setSelectIdx] = useState<number>(0);
   const [visibleLP, setVisibleLP] = useState<boolean>(true);
   const averRotate = Math.ceil(360 / images.length);
 
@@ -43,6 +52,7 @@ const RotateAlbum = () => {
   const onRotate = (e: React.MouseEvent<HTMLButtonElement>) => {
     const target = e.target as HTMLButtonElement;
     const direction = target.dataset.type;
+    audioEl.pause();
 
     clearTimeout(timeout);
     setVisibleLP(false);
@@ -64,6 +74,7 @@ const RotateAlbum = () => {
 
     timeout = setTimeout(() => {
       setVisibleLP(true);
+      audioEl.play();
     }, 500);
   };
 

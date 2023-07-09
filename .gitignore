@@ -8,4 +8,4 @@
 # .env 노출되면 안되는 정보
 .env
 
-rollin.flac
+/client/src/assets/files

@@ -1,7 +1,8 @@
-import Main from "./page/main/Main";
-import RotateAlbum from "./page/album/RotateAlbum";
-import RotateStyle from "./page/album/RotateStyle";
-import Visualizer from "./page/visualizer/Visualizer";
+import Main from "./main/Main";
+import RotateAlbum from "./album/RotateAlbum";
+import RotateStyle from "./album/RotateStyle";
+import Visualizer from "./visualizer/Visualizer";
+import Status from "./status/Status";
 
 export { Main };
-export { RotateAlbum, RotateStyle, Visualizer };
+export { RotateAlbum, RotateStyle, Visualizer, Status };
