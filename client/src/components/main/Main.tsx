@@ -1,57 +1,112 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import "./main.less";
+import { Audio, Canvas, Slide, Status } from "@/components";
+import axios from "axios";
 
-import rollin_sample from "@/assets/files/rollin.flac";
-import changed_sample from "@/assets/files/changed.flac";
-import chimatbaram_sample from "@/assets/files/chimatbaram.flac";
-import goodbye_sample from "@/assets/files/goodbye.flac";
-import highheel_sample from "@/assets/files/hightheel.flac";
-import redsun_sample from "@/assets/files/red_sun.flac";
-import weride_sample from "@/assets/files/we_ride.flac";
-import youhu_sample from "@/assets/files/youhu.flac";
-
-import changed from "@/assets/images/cover/changed.png";
-import rollin from "@/assets/images/cover/rollin.png";
-import chimatbaram from "@/assets/images/cover/chimatbaram.png";
-import goodbye from "@/assets/images/cover/goodbye.png";
-import highheel from "@/assets/images/cover/highheel.png";
-import redsun from "@/assets/images/cover/redsun.png";
-import weride from "@/assets/images/cover/weride.png";
-import youhu from "@/assets/images/cover/youhu.png";
-
-import { RotateAlbum, Status, Visualizer } from "@/components";
-
-interface SongsIF {
-  src: string;
+export interface SongsIF {
   audio: string;
+  cover: string;
 }
 
-const songs: SongsIF[] = [
-  { src: rollin, audio: rollin_sample },
-  { src: changed, audio: changed_sample },
-  { src: chimatbaram, audio: chimatbaram_sample },
-  { src: goodbye, audio: goodbye_sample },
-  { src: highheel, audio: highheel_sample },
-  { src: redsun, audio: redsun_sample },
-  { src: weride, audio: weride_sample },
-  { src: youhu, audio: youhu_sample },
-];
-
 const Main = () => {
-  const [selectIdx, setSelectIdx] = useState<number>(0);
-  const [audioEl, setAudioEl] = useState<HTMLAudioElement>(null);
+  const YOUTUBE_KEY = process.env.REACT_APP_YOUTUBE_KEY;
+  const PLAYLIST_KEY = process.env.REACT_APP_PLAYLIST_VIDEO;
+
+  const [songs, setSongs] = useState<SongsIF[]>([]);
+  const [select, setSelect] = useState<number>(0);
+  const [rotateInt, setRotateInt] = useState<number>(0);
+  const [audio, setAudio] = useState<string>("");
+  const [cover, setCover] = useState<string>("");
+
+  const onLoad = async () => {
+    const url = `https://www.googleapis.com/youtube/v3/playlistItems?key=${YOUTUBE_KEY}`;
+    const params = {
+      playlistId: PLAYLIST_KEY,
+      part: "snippet",
+      maxResults: 50,
+    };
+    const { data } = await axios.get(url, { params: { ...params } });
+    const { items } = data;
+    const snippets = items.map((item: any) => item.snippet);
+    const videoIds = snippets.map((sni: any) => sni.resourceId.videoId);
+    setSongs(videoIds);
+
+    const requests = videoIds.map((id: any) => {
+      return [
+        { get: `http://localhost:8080/stream?url=${id}`, responseType: "" },
+        { get: `http://localhost:8080/play?url=${id}`, responseType: "blob" },
+      ];
+    });
+
+    const responses = await Promise.all(
+      requests.map(async (request: any) => {
+        const [res1, res2] = await Promise.all(
+          request.map((req: any) => {
+            return axios.get(req.get, { responseType: req.responseType });
+          })
+        );
+
+        const { thumbnail } = res1.data;
+        const audioFile = window.URL.createObjectURL(res2.data);
+        return { audio: audioFile, cover: thumbnail.url };
+      })
+    );
+
+    setSongs(responses);
+    setAudio(responses[select].audio);
+    setCover(responses[select].cover);
+  };
+
+  const onChangeSong = (type: string) => {
+    let next = select;
+
+    switch (type) {
+      case Slide.TYPE.NEXT:
+        if (next - 1 < 0) next = songs.length - 1;
+        else next -= 1;
+        break;
+      case Slide.TYPE.PREV:
+        if (next + 1 > songs.length - 1) next = 0;
+        else next += 1;
+        break;
+      default:
+        break;
+    }
+
+    setSelect(next);
+    setAudio(songs[next].audio);
+    setCover(songs[next].cover);
+  };
+
+  useEffect(() => {
+    onLoad();
+  }, []);
 
   return (
-    <div className="main-container">
-      <RotateAlbum
-        selectIdx={selectIdx}
-        setSelectIdx={setSelectIdx}
-        audioEl={audioEl}
-      />
-      <Status audioEl={audioEl} />
-      <Visualizer file={songs[selectIdx].audio} setAudioEl={setAudioEl} />
-    </div>
+    <>
+      <img src={cover} className="main-background" />
+      <div className="main-backdrop-filter" />
+      <div className="main-container">
+        <div className="main-top-area">
+          <Slide
+            songs={songs}
+            cover={cover}
+            onChangeSong={onChangeSong}
+            rotateInt={rotateInt}
+            setRotateInt={setRotateInt}
+          />
+          <Status />
+        </div>
+        <div className="main-bottom-area">
+          <Canvas />
+          <Audio
+            audio={audio}
+            setRotateInt={setRotateInt}
+            onChangeSong={onChangeSong}
+          />
+        </div>
+      </div>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom/dist";
 
-import "./app.less";
+import "@/assets/css/global.less";
 
 import { Main } from "@/components";
 

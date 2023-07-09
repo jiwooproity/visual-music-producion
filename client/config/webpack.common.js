@@ -54,7 +54,12 @@ module.exports = {
     }),
     new CleanWebpackPlugin({}),
     new webpack.DefinePlugin({
-      "process.env.REACT_ENV_TEST": JSON.stringify(process.env.REACT_ENV_TEST),
+      "process.env.REACT_APP_YOUTUBE_KEY": JSON.stringify(
+        process.env.REACT_APP_YOUTUBE_KEY
+      ),
+      "process.env.REACT_APP_PLAYLIST_VIDEO": JSON.stringify(
+        process.env.REACT_APP_PLAYLIST_VIDEO
+      ),
     }),
   ],
 };
