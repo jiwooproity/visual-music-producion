@@ -1,8 +1,11 @@
 import Main from "./main/Main";
-import RotateAlbum from "./album/RotateAlbum";
-import RotateStyle from "./album/RotateStyle";
-import Visualizer from "./visualizer/Visualizer";
-import Status from "./status/Status";
+
+import Slide from "./main/slide/Slide";
+import Status from "./main/status/Status";
+
+import Canvas from "./main/canvas/Canvas";
+import Audio from "./main/audio/Audio";
 
 export { Main };
-export { RotateAlbum, RotateStyle, Visualizer, Status };
+export { Slide, Status };
+export { Canvas, Audio };
