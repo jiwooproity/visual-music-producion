@@ -1,0 +1,136 @@
+.slide-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: visible;
+  position: relative;
+  padding: 0px 0px 150px 0px;
+  -ms-user-select: none;
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.slide-wrapper {
+  width: 700px;
+  display: flex;
+  justify-content: center;
+  z-index: 3;
+}
+
+.slide-background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.slide-background-backdrop {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(20px);
+  z-index: 1;
+}
+
+.slide-background.active {
+  opacity: 1;
+}
+
+.slide-background > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.swiper-container {
+  width: 1600px;
+  height: 100%;
+  margin: 0px 167px 0px 0px;
+}
+
+.swiper {
+  width: 100%;
+}
+
+.swiper-slide {
+  overflow: visible;
+}
+
+.swiper-slide {
+  opacity: 0.4;
+  transition: opacity 0.2s ease;
+}
+
+.swiper-slide > .image-wrapper > .active-backdrop {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  transition: background-color 0.5s ease;
+}
+
+.swiper-slide-active > .image-wrapper > .active-backdrop {
+  backdrop-filter: blur(0px);
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.swiper-slide-active {
+  opacity: 1;
+}
+
+.lp-image {
+  width: 500px;
+  position: absolute;
+  top: 50%;
+  left: 0px;
+  transform: translateY(-50%);
+  z-index: -1;
+  transition: left 1s ease;
+  transform-origin: center;
+}
+
+.swiper-slide-active > .image-wrapper > .lp-image {
+  left: 120px;
+  animation: rotateLP 5s linear infinite;
+}
+
+@keyframes rotateLP {
+  0% {
+    transform: translateY(-50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(-50%) rotate(360deg);
+  }
+}
+
+.swiper-slide > .image-wrapper {
+  width: 100%;
+  display: block;
+  position: relative;
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.8) 0px 2px 4px,
+    rgba(0, 0, 0, 0.7) 0px 7px 13px -3px, rgba(0, 0, 0, 0.5) 0px -3px 0px inset;
+}
+
+.swiper-slide > .image-wrapper > img {
+  display: block;
+  width: 100%;
+  height: 533px;
+  border-radius: 10px;
+  object-fit: cover;
+}

@@ -43,7 +43,7 @@ module.exports = {
         type: "asset/inline",
       },
       {
-        test: /\.flac$/,
+        test: /\.(flac|wma)$/,
         type: "asset/resource",
       },
     ],

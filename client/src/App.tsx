@@ -1,18 +1,18 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom/dist";
 
-import "@/assets/css/global.less";
+import "@/assets/less/global.less";
 
-import { Main } from "@/components";
+import { Main } from "@/components/page";
 
 const App = () => {
   return (
-    <div className="app-container">
+    <main className="main">
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Main />} />
         </Routes>
       </BrowserRouter>
-    </div>
+    </main>
   );
 };
 
