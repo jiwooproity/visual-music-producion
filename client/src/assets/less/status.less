@@ -1,0 +1,144 @@
+@import url("https://fonts.googleapis.com/css2?family=Cute+Font&display=swap");
+
+.status-container {
+  width: 700px;
+  height: 600px;
+  margin: 0px 0px 50px 0px;
+  display: flex;
+  gap: 5px;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.status-title-box {
+  width: 100%;
+  height: 140px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 15px 0px 30px 0px;
+}
+
+.status-title {
+  font-size: 50px;
+  line-height: 80px;
+  color: white;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.status-control-box {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+}
+
+.status-control-box > .status-play-button {
+  width: 45px;
+  height: 42px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("../svg/play-solid.svg");
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.status-control-box > .status-pause-button {
+  width: 45px;
+  height: 45px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("../svg/pause-solid.svg");
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.status-control-box > .status-next-button {
+  width: 50px;
+  height: 45px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("../svg/forward-step-solid.svg");
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.status-control-box > .status-prev-button {
+  width: 50px;
+  height: 45px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-image: url("../svg/backward-step-solid.svg");
+  background-position: center;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  text-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+
+.status-progress-bar {
+  width: 100%;
+  height: 15px;
+  // border: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgba(0, 0, 0, 0.05);
+  backdrop-filter: blur(10px);
+  // border-radius: 0px;
+  box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+    rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+    rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px,
+    rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px,
+    rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+
+.status-bar {
+  width: 0%;
+  height: 100%;
+  position: relative;
+  background-color: rgba(255, 255, 255, 0.3);
+  transition: width 0.5s ease;
+}
+
+.status-bar::before {
+  content: "";
+  width: 23px;
+  height: 23px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  right: -11.05px;
+  transform: translateY(-50%);
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+}
+
+.status-time-box {
+  width: 100%;
+  padding: 0px 1px 0px 1px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.status-time {
+  font-family: "Cute Font", cursive;
+  font-size: 18px;
+  line-height: 18px;
+  color: white;
+}
